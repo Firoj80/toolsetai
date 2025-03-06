@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOOL SET AI - Professional Online Tools</title>
+    <meta name="description" content="Advanced digital tools suite for images, documents, videos and conversions with AI-powered features">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-base: #081512;
+            --dark-primary: #0a1a17;
+            --dark-secondary: #0f221e;
+            --accent-neon: #00ff88;
+            --text-primary: #cce5e0;
+            --text-secondary: #8baba5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--dark-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header-container {
+            background: var(--dark-primary);
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--dark-secondary);
+        }
+
+        .website-title {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--text-primary);
+            margin: 0;
+            position: relative;
+            text-shadow: 0 0 15px rgba(0,255,136,0.1);
+        }
+
+        .website-title::after {
+            content: "";
+            display: block;
+            width: 120px;
+            height: 3px;
+            background: var(--accent-neon);
+            margin: 1.5rem auto;
+            box-shadow: 0 0 12px rgba(0,255,136,0.2);
+        }
+
+        .site-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 1rem auto 0;
+            max-width: 800px;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        /* Navigation Bar */
+        .mandatory-nav {
+            background: var(--dark-primary);
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--dark-secondary);
+            margin-top: 1.5rem;
+        }
+
+        .nav-links {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-neon);
+            background: rgba(0,255,136,0.05);
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .tool-card {
+            background: var(--dark-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--dark-secondary);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tool-card:nth-child(1) { --card-color: #3dccc7; }
+        .tool-card:nth-child(2) { --card-color: #ff7e67; }
+        .tool-card:nth-child(3) { --card-color: #00ff88; }
+        .tool-card:nth-child(4) { --card-color: #9d6ff3; }
+        .tool-card:nth-child(5) { --card-color: #ffd700; }
+        .tool-card:nth-child(6) { --card-color: #ff6b6b; }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--card-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            color: var(--card-color);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .tool-card:hover .tool-icon {
+            transform: scale(1.2);
+        }
+
+        .tool-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Ad Sections */
+        .ad-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .ad-container {
+            background: var(--dark-primary);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid var(--dark-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .website-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .site-description {
+                font-size: 1rem;
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <h1 class="website-title">TOOL SET AI</h1>
+        
+        <p class="site-description">
+            Snow Day Calculator, Asphalt Calculator
+        </p>
+
+        <nav class="mandatory-nav">
+            <div class="nav-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/dmca">DMCA</a>
+                <a href="/contact">Contact</a>
+                <a href="/about">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Top Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Tools Grid -->
+    <div class="tools-grid">
+        <a href="#" class="tool-card">
+            <i class="fas fa-image tool-icon"></i>
+            <h3>Image Processor</h3>
+            <p>Professional image editing & optimization</p>
+        </a>
+
+        <a href="#" class="tool-card">
+            <i class="fas fa-file-pdf tool-icon"></i>
+            <h3>PDF Manager</h3>
+            <p>Advanced PDF editing & conversion</p>
+        </a>
+
+        <a href="#" class="tool-card">
+            <i class="fas fa-video tool-icon"></i>
+            <h3>Video Converter</h3>
+            <p>4K video processing & compression</p>
+        </a>
+
+        <a href="#" class="tool-card">
+            <i class="fas fa-file-export tool-icon"></i>
+            <h3>File Converter</h3>
+            <p>Universal format conversion</p>
+        </a>
+
+        <a href="#" class="tool-card">
+            <i class="fas fa-qrcode tool-icon"></i>
+            <h3>QR Generator</h3>
+            <p>Custom QR code creation</p>
+        </a>
+
+        <a href="#" class="tool-card">
+            <i class="fas fa-snowflake tool-icon"></i>
+            <h3>Weather Tools</h3>
+            <p>Advanced weather predictions</p>
+        </a>
+    </div>
+
+    <!-- Bottom Ad Section -->
+    <div class="ad-section">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load ads after content
+            const loadAds = () => {
+                const ads = document.querySelectorAll('.adsbygoogle');
+                ads.forEach(ad => {
+                    if(!ad.innerHTML.trim()) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                });
+            };
+            
+            // Initial load
+            loadAds();
+            window.addEventListener('load', loadAds);
+        });
+    </script>
+</body>
+</html>
