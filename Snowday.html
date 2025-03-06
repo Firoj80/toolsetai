@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snow Day Calculator - Instant School Closure Predictions</title>
+    <meta name="description" content="Accurate snow day predictions using real-time weather data. Check school closure probabilities instantly with our AI-powered Snow Day Calculator.">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-1: #0a1a17;
+            --dark-2: #112723;
+            --accent: #00ff88;
+            --text: #e0f2ef;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-1);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: var(--dark-2);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #1a332e;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .input-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .input-heading {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .dark-input {
+            width: 100%;
+            padding: 1.2rem;
+            background: #1a3330;
+            border: 2px solid #1f3d38;
+            border-radius: 0.8rem;
+            color: var(--text);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .dark-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0,255,136,0.2);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: var(--accent);
+            color: var(--dark-1);
+            border: none;
+            border-radius: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,255,136,0.3);
+        }
+
+        /* Results Section */
+        .results-section {
+            background: var(--dark-2);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #1a332e;
+        }
+
+        .probability-display {
+            text-align: center;
+            padding: 2rem;
+            background: #1a3330;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .probability-percent {
+            font-size: 3.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .weather-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dark-1);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            text-align: center;
+        }
+
+        /* SEO Content */
+        .seo-content {
+            grid-column: 1 / -1;
+            background: var(--dark-2);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .input-section,
+            .results-section {
+                width: 100%;
+            }
+            
+            .probability-percent {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Ad -->
+    <div class="ad-section" style="max-width:1400px; margin:1rem auto; padding:0 2rem;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-XXXXXXXXXX"
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="main-container">
+        <!-- Input Section -->
+        <div class="input-section">
+            <h2 class="input-heading">❄️ Check Snow Day Probability ❄️</h2>
+            <div class="input-container">
+                <input type="text" 
+                       class="dark-input"
+                       placeholder="Enter ZIP code or State..."
+                       id="locationInput">
+                <button class="calculate-btn" onclick="calculateSnowDay()">
+                    Calculate Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="probability-display">
+                <div class="probability-percent" id="probabilityPercent">0%</div>
+                <div class="probability-label" id="probabilityLabel">Chance of Snow Day</div>
+                <div class="weather-stats" id="weatherStats">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content Section -->
+        <div class="seo-content">
+            <h1>Snow Day Calculator: Accurate School Closure Predictions</h1>
+            <p>Our advanced Snow Day Calculator helps parents and students prepare for potential school closures using real-time weather data and historical patterns.</p>
+            
+            <h2>How It Works</h2>
+            <p>The Snow Day Calculator analyzes multiple factors including:</p>
+            <ul>
+                <li>Real-time snowfall accumulation</li>
+                <li>Current temperature and wind chill</li>
+                <li>Local school district policies</li>
+                <li>Historical closure patterns</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer Ad -->
+    <div class="ad-section" style="max-width:1400px; margin:1rem auto; padding:0 2rem;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-XXXXXXXXXX"
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <script>
+        const API_KEY = 'YOUR_OPENWEATHER_API_KEY';
+
+        async function calculateSnowDay() {
+            const location = document.getElementById('locationInput').value;
+            
+            try {
+                // Get coordinates
+                const geoResponse = await fetch(
+                    `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`
+                );
+                const [geoData] = await geoResponse.json();
+                
+                // Get weather data
+                const weatherResponse = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${geoData.lat}&lon=${geoData.lon}&appid=${API_KEY}`
+                );
+                const weatherData = await weatherResponse.json();
+                
+                // Calculate probability
+                const probability = calculateProbability(weatherData);
+                displayResults(probability, weatherData);
+                
+                // Track event
+                gtag('event', 'calculation', {
+                    'event_category': 'SnowDay',
+                    'event_label': location
+                });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error fetching data. Please try again.');
+            }
+        }
+
+        function calculateProbability(weatherData) {
+            let probability = 0;
+            const snow = weatherData.snow?.['1h'] || 0; // mm to inches
+            const temp = weatherData.main.temp - 273.15; // Convert to Celsius
+            
+            // Calculation logic
+            if (snow > 7.6) probability += 60;  // 3+ inches
+            if (temp < -10) probability += 30;  // Extreme cold
+            if (weatherData.wind.speed > 13) probability += 20; // High wind
+            
+            return Math.min(probability, 95); // Cap at 95%
+        }
+
+        function displayResults(probability, weatherData) {
+            // Update percentage
+            document.getElementById('probabilityPercent').textContent = `${probability}%`;
+            
+            // Update weather stats
+            const statsContainer = document.getElementById('weatherStats');
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <i class="fas fa-snowflake"></i>
+                    <div class="stat-value">${(weatherData.snow?.['1h'] || 0).toFixed(1)}mm</div>
+                    <div class="stat-label">Snowfall</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <div class="stat-value">${(weatherData.main.temp - 273.15).toFixed(1)}°C</div>
+                    <div class="stat-label">Temperature</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-wind"></i>
+                    <div class="stat-value">${weatherData.wind.speed}m/s</div>
+                    <div class="stat-label">Wind Speed</div>
+                </div>
+            `;
+            
+            // Update probability color
+            const percentElement = document.getElementById('probabilityPercent');
+            percentElement.style.color = probability > 70 ? '#00ff88' : 
+                                       probability > 40 ? '#ffd700' : 
+                                       '#ff6b6b';
+        }
+
+        // Initialize AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
+ Enter your content
+</body>
+
+</html>

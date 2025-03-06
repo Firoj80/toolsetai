@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asphalt Calculator - Professional Paving Estimator</title>
+    <meta name="description" content="Accurate asphalt volume and cost calculator with real-time weather recommendations. Supports metric and imperial units.">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-base: #0a1a17;
+            --dark-surface: #112723;
+            --accent-primary: #00ff88;
+            --text-primary: #e0f2ef;
+            --text-secondary: #93b2ad;
+            --border-color: #1a332e;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .input-section {
+            background: var(--dark-surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .unit-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .unit-btn {
+            background: #1a3330;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .unit-btn.active {
+            background: var(--accent-primary);
+            color: var(--dark-base);
+            border-color: var(--accent-primary);
+        }
+
+        .dark-input {
+            width: 100%;
+            padding: 1rem;
+            background: #1a3330;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .dark-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(0,255,136,0.2);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent-primary);
+            color: var(--dark-base);
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results-section {
+            background: var(--dark-surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card {
+            background: var(--dark-base);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .weather-alert {
+            background: #2d1a1a;
+            border: 1px solid #ff6b6b;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Ad -->
+    <div class="ad-section">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-XXXXXXXXXX"
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+    </div>
+
+    <div class="main-container">
+        <!-- Input Section -->
+        <div class="input-section">
+            <h2 class="input-heading">🏗️ Asphalt Calculator</h2>
+            
+            <div class="unit-toggle">
+                <button class="unit-btn active" data-unit="metric" onclick="toggleUnit('metric')">Metric</button>
+                <button class="unit-btn" data-unit="imperial" onclick="toggleUnit('imperial')">Imperial</button>
+            </div>
+
+            <input type="number" class="dark-input" id="length" placeholder="Length (m)" step="0.01">
+            <input type="number" class="dark-input" id="width" placeholder="Width (m)" step="0.01">
+            <input type="number" class="dark-input" id="thickness" placeholder="Thickness (cm)" step="0.1">
+            <input type="number" class="dark-input" id="density" placeholder="Density (kg/m³)" value="2400" step="10">
+
+            <button class="calculate-btn" onclick="calculateAsphalt()">
+                Calculate Now
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="stat-card">
+                <i class="fas fa-cube"></i>
+                <div class="stat-value" id="volumeResult">0 m³</div>
+                <div class="stat-label">Total Volume</div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-coins"></i>
+                <div class="stat-value" id="costResult">$0.00</div>
+                <div class="stat-label">Estimated Cost</div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-cloud-sun"></i>
+                <div class="stat-value" id="weatherStatus">Checking...</div>
+                <div class="stat-label">Paving Conditions</div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <div class="seo-content">
+            <h1>Professional Asphalt Calculator</h1>
+            <p>Calculate exact asphalt requirements with our advanced calculator tool...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentUnit = 'metric';
+        const WEATHER_API_KEY = 'YOUR_OPENWEATHER_API_KEY';
+
+        // Unit Conversion Functions
+        const converters = {
+            metric: {
+                volume: (l, w, t) => l * w * (t/100),
+                density: d => d,
+                cost: weight => (weight / 1000) * 150 // $150/ton
+            },
+            imperial: {
+                volume: (l, w, t) => (l * w * (t/12)) / 27, // cubic yards
+                density: d => d * 1.68555, // convert lbs/yd³ to kg/m³
+                cost: weight => weight * 0.15 // $0.15/lb
+            }
+        };
+
+        function toggleUnit(unit) {
+            currentUnit = unit;
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.unit === unit);
+            });
+            updateInputLabels();
+        }
+
+        function updateInputLabels() {
+            const labels = {
+                metric: ['Length (m)', 'Width (m)', 'Thickness (cm)', 'Density (kg/m³)'],
+                imperial: ['Length (ft)', 'Width (ft)', 'Thickness (in)', 'Density (lbs/yd³)']
+            };
+            document.querySelectorAll('.dark-input').forEach((input, idx) => {
+                input.placeholder = labels[currentUnit][idx];
+            });
+        }
+
+        async function calculateAsphalt() {
+            // Get input values
+            const inputs = ['length', 'width', 'thickness', 'density'].map(id => {
+                const value = parseFloat(document.getElementById(id).value);
+                return isNaN(value) ? 0 : value;
+            });
+
+            // Calculate volume and weight
+            const [length, width, thickness, density] = inputs;
+            const converter = converters[currentUnit];
+            
+            const volume = converter.volume(length, width, thickness);
+            const weight = volume * converter.density(density);
+            const cost = converter.cost(weight);
+
+            // Update results
+            document.getElementById('volumeResult').textContent = 
+                `${volume.toFixed(2)} ${currentUnit === 'metric' ? 'm³' : 'yd³'}`;
+            document.getElementById('costResult').textContent = 
+                `$${cost.toFixed(2)}`;
+
+            // Get weather data
+            try {
+                const weather = await getWeatherData();
+                updateWeatherDisplay(weather);
+            } catch (error) {
+                document.getElementById('weatherStatus').textContent = 
+                    "⚠️ Weather data unavailable";
+            }
+        }
+
+        async function getWeatherData() {
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${WEATHER_API_KEY}`
+            );
+            return response.json();
+        }
+
+        function updateWeatherDisplay(data) {
+            const temp = (data.main.temp - 273.15).toFixed(1);
+            let status = '✅ Good Conditions';
+            
+            if(temp < 5) status = '❄️ Too Cold';
+            if(temp > 35) status = '🔥 Too Hot';
+
+            document.getElementById('weatherStatus').innerHTML = `
+                ${status}<br>
+                <small>${temp}°C</small>
+            `;
+        }
+
+        // Initialize AdSense
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
